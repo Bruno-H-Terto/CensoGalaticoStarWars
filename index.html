@@ -7,6 +7,13 @@
   <link rel="stylesheet" href="assets/styles/style.css">
 </head>
 <body>
+  <form id="form" onsubmit="keypress(event)">
+    <label for="Find">Planeta</label>
+    <input type="text" id="search" name="search">
+    <br>
+    <button type="submit">Pesquisar</button>
+  </form>
+
   <div id="list_planets"></div>
   <aside>
     <div id="details_planet"></div>

@@ -16,17 +16,16 @@ async function requestAPI() {
 
 async function createBtnPlanet() {
   list = await requestAPI();
-  let i = 0;
 
-  list.forEach(planet => {
+
+  list.forEach((planet, index) => {
 
     let btn = document.createElement('button');
     btn.textContent = planet.name;
-    btn.setAttribute('onclick', `dataPlanet(${i})`);
+    btn.setAttribute('onclick', `dataPlanet(${index})`);
 
 
     list_planets.appendChild(btn);
-    i++;
   });
 }
 
@@ -43,4 +42,24 @@ function dataPlanet(index){
   `;
 
   details_planet.appendChild(topic_list);
+}
+
+function keypress(event){
+  event.preventDefault();
+  query();
+}
+
+function query(){
+  let formData = new FormData(document.getElementById('form'));
+  let q_planet = formData.get('search');
+  details_planet.innerHTML = '';
+  let result = list.find((planet) => planet.name.toLowerCase() === q_planet.toLowerCase());
+
+  if(result){
+    dataPlanet(list.indexOf(result));
+  }else{
+    let msg = document.createElement('p');
+    msg.textContent = `Não foram localizados resultados para: ${q_planet}`;
+    details_planet.append(msg);
+  }
 }
