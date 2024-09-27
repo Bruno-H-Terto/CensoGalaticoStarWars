@@ -7,17 +7,39 @@
   <link rel="stylesheet" href="assets/styles/style.css">
 </head>
 <body>
-  <form id="form" onsubmit="keypress(event)">
-    <label for="Find">Planeta</label>
-    <input type="text" id="search" name="search">
-    <br>
-    <button type="submit">Pesquisar</button>
-  </form>
+  <header class="header-bar visible">
+    <div>
 
-  <div id="list_planets"></div>
-  <aside>
-    <div id="details_planet"></div>
-  </aside>
+      <h1>Censo</h1>
+      <h2>Galático</h2>
+    </div>
+    <nav class="navbar">
+      <form id="form" onsubmit="keypress(event)">
+        <label for="Find"></label>
+        <input type="text" id="search" name="search" placeholder="Planeta">
+        <br>
+        <button type="submit" class="btn btn-sucess">Pesquisar</button>
+      </form>
+    </nav>
+  </header>
+
+  <main>
+    <div id="list_planets"></div>
+    <div class="query">
+
+    </div>
+    <aside>
+      <div id="details_planet"></div>
+    </aside>
+  </main>
+
+  <footer>
+    <div>
+      <small>Bruno Herculano - 2024</small>
+      <cite>@Censo Galático</cite>
+    </div>
+  </footer>
+
   <script src="assets/javascript/main.js"></script>
 </body>
 </html>

@@ -5,6 +5,15 @@ const list_planets = document.getElementById('list_planets');
 const details_planet = document.getElementById('details_planet');
 let list = [];
 
+window.addEventListener('scroll', function() {
+  let nav = document.querySelector('.header-bar');
+  if (window.scrollY < 100) {
+    nav.classList.add('visible');
+  } else {
+    nav.classList.remove('visible');
+  }
+});
+
 async function requestAPI() {
   const data = await fetch(URL);
   const response = await data.json();
@@ -23,23 +32,31 @@ async function createBtnPlanet() {
     let btn = document.createElement('button');
     btn.textContent = planet.name;
     btn.setAttribute('onclick', `dataPlanet(${index})`);
-
+    btn.className = `btn-planet ${planet.name}`;
+    btn.style.backgroundImage = `url('assets/img/${planet.name}.jpeg')`;
+    btn.style.backgroundSize = 'cover';
 
     list_planets.appendChild(btn);
   });
 }
 
+function capitalize(text){
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
 async function dataPlanet(index) {
+  document.querySelector('.query').scrollIntoView({ behavior: 'smooth' }); 
   let planet = list[index];
   details_planet.innerHTML = '';
   let residents = planet.residents;
 
   let topic_list = document.createElement('ul');
+  topic_list.className = 'details-planet';
   topic_list.innerHTML += `
     <li>${planet.name}</li>
-    <li>${planet.climate}</li>
-    <li>${planet.population}</li>
-    <li>${planet.terrain}</li>
+    <li>${capitalize(planet.climate)}</li>
+    <li>${planet.population} habitantes</li>
+    <li>${capitalize(planet.terrain)}</li>
   `;
 
   let residentsTable = document.createElement('table');
@@ -104,6 +121,7 @@ function query(){
   if(result){
     dataPlanet(list.indexOf(result));
   }else{
+    document.querySelector('.query').scrollIntoView({ behavior: 'smooth' }); 
     let msg = document.createElement('p');
     msg.textContent = `Não foram localizados resultados para: ${q_planet}`;
     details_planet.append(msg);
