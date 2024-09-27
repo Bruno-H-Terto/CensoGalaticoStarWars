@@ -116,14 +116,31 @@ function query(){
   let formData = new FormData(document.getElementById('form'));
   let q_planet = formData.get('search');
   details_planet.innerHTML = '';
-  let result = list.find((planet) => planet.name.toLowerCase() === q_planet.toLowerCase());
+  let result = list.filter((planet) => planet.name.toLowerCase().includes(q_planet.toLowerCase()));
+  document.querySelector('.query').scrollIntoView({ behavior: 'smooth' }); 
+  if (result.length > 1) {;
+    let msg = document.createElement('p');
+    msg.textContent = `Resultados para: ${q_planet}`;
+    details_planet.appendChild(msg);
 
-  if(result){
-    dataPlanet(list.indexOf(result));
+    result.forEach(r => {
+      let div = document.createElement('div');
+      div.className = "list-results";
+      let btn = document.createElement('button');
+      btn.textContent = r.name;
+      btn.onclick = () => querySelection(r);
+      div.appendChild(btn);
+      details_planet.appendChild(div);
+    });
+  }else if(result.length == 1){
+    dataPlanet(list.indexOf(result[0]));
   }else{
-    document.querySelector('.query').scrollIntoView({ behavior: 'smooth' }); 
     let msg = document.createElement('p');
     msg.textContent = `Não foram localizados resultados para: ${q_planet}`;
     details_planet.append(msg);
   }
+}
+
+function querySelection(selection){
+  dataPlanet(list.indexOf(selection));
 }

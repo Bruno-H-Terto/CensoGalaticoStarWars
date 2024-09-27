@@ -139,6 +139,24 @@ main {
   font-family: "Montserrat", system-ui;
 }
 
+.list-results {
+  display: grid;
+  grid-template-columns: 1fr;
+  font-size: 2rem;
+}
+
+.list-results button {
+  margin: 0.3rem;
+  font-size: 1.3rem;
+  background: rgb(32, 32, 32);
+  padding: 1rem;
+  border-radius: 0.3rem;
+}
+
+.list-results button:hover{
+  background: rgb(107, 104, 104);
+}
+
 table {
   margin-top: 10rem;
   font-size: 1.2rem;
