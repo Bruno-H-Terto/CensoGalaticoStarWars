@@ -1,34 +1,31 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Censo Galático</title>
+  <title>Galactic Census</title>
   <link rel="stylesheet" href="assets/styles/style.css">
-  <link rel="shortcut icon" type="imagex/png" href="./assets/img/favicon.svg">
+  <link rel="shortcut icon" type="image/png" href="./assets/img/favicon.svg">
 </head>
 <body>
   <header class="header-bar visible">
     <div>
-
-      <h1>Censo</h1>
-      <h2>Galático</h2>
+      <h1>Census</h1>
+      <h2>Galactic</h2>
     </div>
     <nav class="navbar">
       <form id="form" onsubmit="keypress(event)">
-        <label for="Find"></label>
-        <input type="text" id="search" name="search" placeholder="Planeta">
+        <label for="search"></label>
+        <input type="text" id="search" name="search" placeholder="Planet">
         <br>
-        <button type="submit" class="btn btn-sucess">Pesquisar</button>
+        <button type="submit" class="btn btn-success">Search</button>
       </form>
     </nav>
   </header>
 
   <main>
     <div id="list_planets"></div>
-    <div class="query">
-
-    </div>
+    <div class="query"></div>
     <aside>
       <div id="details_planet"></div>
     </aside>
@@ -37,11 +34,10 @@
   <footer>
     <div>
       <small>Bruno Herculano - 2024</small>
-      <cite>@Censo Galático</cite>
+      <cite>@Galactic Census</cite>
     </div>
   </footer>
 
   <script src="assets/javascript/main.js"></script>
 </body>
 </html>
-

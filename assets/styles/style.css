@@ -1,12 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import 'animate.css';
 @font-face {
   font-family: 'StarJedi';
   src: url('../font/starjedi/Starjedi.ttf') format('truetype'),
        url('../font/starjedi/Starjhol.ttf') format('truetype');
 }
 
+@keyframes color {
+  0% {
+      left: 0;
+      top: 30%;
+      color: var(--yellow-color);
+  }
+  100% {
+    top: 30%;
+    color: rgb(255, 255, 255);
+  }
+}
 
+.loading {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 5rem;
+  font-size: 3rem;
+  animation: color 2s infinite alternate;
+}
 
 
 :root {
@@ -220,6 +240,8 @@ button {
 footer {
   margin: 3rem;
 }
+
+
 
 
 @media (max-width: 1000px) {

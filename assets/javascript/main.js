@@ -5,6 +5,16 @@ const list_planets = document.getElementById('list_planets');
 const details_planet = document.getElementById('details_planet');
 let list = [];
 
+function addAnimation(obj){
+  obj.classList.add('loading');
+  obj.textContent = 'Loading...';
+}
+
+function removeAnimation(obj){
+  obj.classList.remove('loading');
+  obj.textContent = '';
+}
+
 window.addEventListener('scroll', function() {
   let nav = document.querySelector('.header-bar');
   if (window.scrollY < 100) {
@@ -24,11 +34,11 @@ async function requestAPI() {
 }
 
 async function createBtnPlanet() {
+  addAnimation(list_planets);
   list = await requestAPI();
-
+  removeAnimation(list_planets);
 
   list.forEach((planet, index) => {
-
     let btn = document.createElement('button');
     btn.textContent = planet.name;
     btn.setAttribute('onclick', `dataPlanet(${index})`);
@@ -45,9 +55,11 @@ function capitalize(text){
 }
 
 async function dataPlanet(index) {
+  details_planet.innerHTML = '';
+  addAnimation(details_planet);
+
   document.querySelector('.query').scrollIntoView({ behavior: 'smooth' }); 
   let planet = list[index];
-  details_planet.innerHTML = '';
   let residents = planet.residents;
 
   let topic_list = document.createElement('ul');
@@ -55,19 +67,19 @@ async function dataPlanet(index) {
   topic_list.innerHTML += `
     <li>${planet.name}</li>
     <li>${capitalize(planet.climate)}</li>
-    <li>${planet.population} habitantes</li>
+    <li>${planet.population} inhabitants</li>
     <li>${capitalize(planet.terrain)}</li>
   `;
 
   let residentsTable = document.createElement('table');
   residentsTable.innerHTML = `
     <caption>
-      Habitantes notáveis de ${planet.name}
+      Notable residents of ${planet.name}
     </caption>
     <thead>
       <tr>
-        <th>Nome</th>
-        <th>Data de Nascimento</th>
+        <th>Name</th>
+        <th>Birth Year</th>
       </tr>
     </thead>
     <tbody>
@@ -91,8 +103,8 @@ async function dataPlanet(index) {
   } else {
     residentsTable.innerHTML += `
       <tr>
-        <td>Sem registro</td>
-        <td>Sem registro</td>
+        <td>No records</td>
+        <td>No records</td>
       </tr>
     `;
   }
@@ -102,10 +114,10 @@ async function dataPlanet(index) {
   </table>
   `;
 
+  removeAnimation(details_planet);
   details_planet.appendChild(topic_list);
   details_planet.appendChild(residentsTable);
 }
-
 
 function keypress(event){
   event.preventDefault();
@@ -118,9 +130,9 @@ function query(){
   details_planet.innerHTML = '';
   let result = list.filter((planet) => planet.name.toLowerCase().includes(q_planet.toLowerCase()));
   document.querySelector('.query').scrollIntoView({ behavior: 'smooth' }); 
-  if (result.length > 1) {;
+  if (result.length > 1) {
     let msg = document.createElement('p');
-    msg.textContent = `Resultados para: ${q_planet}`;
+    msg.textContent = `Results for: ${q_planet}`;
     details_planet.appendChild(msg);
 
     result.forEach(r => {
@@ -132,11 +144,11 @@ function query(){
       div.appendChild(btn);
       details_planet.appendChild(div);
     });
-  }else if(result.length == 1){
+  } else if(result.length == 1){
     dataPlanet(list.indexOf(result[0]));
-  }else{
+  } else {
     let msg = document.createElement('p');
-    msg.textContent = `Não foram localizados resultados para: ${q_planet}`;
+    msg.textContent = `No results found for: ${q_planet}`;
     details_planet.append(msg);
   }
 }
